@@ -13,6 +13,7 @@ render(){
  let selectedStar = this.props.message.starred ? "-o" : "";
 
   return (
+  <div className="container">
     <div className={`row message ${readUnread} ${selectedMsg}`}>
       <div className="col-xs-1">
         <div className="row">
@@ -31,10 +32,15 @@ render(){
         </div>
       </div>
       <div className="col-xs-11">
+      {this.props.message.labels.map(label => <span className="label label-warning">{label}</span>)}
+      
         <a href="">
            {this.props.msgSubject}
     </a>
   </div>
+</div>
+
+
 </div>
 
 
