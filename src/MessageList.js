@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import MessageListSubject from './MessageListSubject';
+import Message from './Message';
 
 
 class MessageList extends Component {
@@ -10,7 +10,13 @@ render(){
     console.log('MessageList component', this);
 
 let messageList = this.props.messages.map((msg) =>
-    <MessageListSubject key={msg.id} msgSubject={msg.subject}/>)
+    <Message key={msg.id} msgSubject={msg.subject}
+
+    msgStatus = {msg.read}
+    msgSelected ={msg.selected}
+    toggleSelected = {this.props.toggleSelected}
+    message={msg}
+    />)
 
   return (
 

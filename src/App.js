@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import MessageList from './MessageList';
-import Message from './Message';
 import Toolbar from './Toolbar';
+
 
 
 class App extends Component {
@@ -69,8 +68,17 @@ class App extends Component {
     "labels": []
   }
 ]
+  }
 
-
+  toggleSelected = (message) => {
+    console.log(message);
+    this.setState((prevState)=>{
+      let index = prevState.messages.indexOf(message)
+      prevState.messages[index].selected ?
+       prevState.messages[index].selected = false
+      : prevState.messages[index].selected = true;
+    })
+    console.log("I hate react____",this.state.messages);
   }
 
   render() {
@@ -78,8 +86,10 @@ class App extends Component {
     return (
       <div className="App">
         <Toolbar/>
-        <Message/>
-        <MessageList  messages = {this.state.messages}/>
+        <MessageList
+          messages = {this.state.messages}
+          toggleSelected = {this.toggleSelected}
+          />
       </div>
     );
   }
