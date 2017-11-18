@@ -74,9 +74,8 @@ class App extends Component {
     console.log(message);
     this.setState((prevState)=>{
       let index = prevState.messages.indexOf(message)
-      prevState.messages[index].selected ?
-       prevState.messages[index].selected = false
-      : prevState.messages[index].selected = true;
+      prevState.messages[index].selected = !prevState.messages[index].selected;
+      return {...message}
     })
     console.log("I hate react____",this.state.messages);
   }
