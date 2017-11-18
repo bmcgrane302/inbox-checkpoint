@@ -10,6 +10,7 @@ render(){
  let readUnread = this.props.msgStatus ? "read" : "unread";
  let selectedMsg = this.props.msgSelected ? "selected" :  '';
  let checked = selectedMsg ? "checked" : "";
+ let selectedStar = this.props.message.starred ? "-o" : "";
 
   return (
     <div className={`row message ${readUnread} ${selectedMsg}`}>
@@ -22,7 +23,10 @@ render(){
                  />
           </div>
           <div className="col-xs-2">
-            <i className="star fa fa-star-o"></i>
+            <i className={`star fa fa-star${selectedStar}`}
+             value={this.props.message.starred}
+             onClick={()=> this.props.toggleStar(this.props.message)}
+            ></i>
           </div>
         </div>
       </div>

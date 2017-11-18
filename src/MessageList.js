@@ -15,6 +15,7 @@ let messageList = this.props.messages.map((msg) =>
     msgStatus = {msg.read}
     msgSelected ={msg.selected}
     toggleSelected = {this.props.toggleSelected}
+    toggleStar = {this.props.toggleStar}
     message={msg}
     />)
 

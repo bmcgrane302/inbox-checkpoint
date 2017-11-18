@@ -80,6 +80,18 @@ class App extends Component {
     console.log("I hate react____",this.state.messages);
   }
 
+  toggleStar = (message) => {
+    console.log(message);
+    this.setState((prevState)=>{
+      let index = prevState.messages.indexOf(message)
+      prevState.messages[index].starred = !prevState.messages[index].starred;
+      return {...message}
+    })
+    console.log("I love react ____",this.state.messages);
+  }
+
+
+
   render() {
 
     return (
@@ -88,6 +100,7 @@ class App extends Component {
         <MessageList
           messages = {this.state.messages}
           toggleSelected = {this.toggleSelected}
+          toggleStar = {this.toggleStar}
           />
       </div>
     );
