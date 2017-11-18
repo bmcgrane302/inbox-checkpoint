@@ -95,14 +95,18 @@ class App extends Component {
   render() {
 
     return (
-      <div className="App">
-        <Toolbar/>
+    <div className="container">
+      <div className="App" >
+        <Toolbar
+          messages = {this.state.messages}
+          />
         <MessageList
           messages = {this.state.messages}
           toggleSelected = {this.toggleSelected}
           toggleStar = {this.toggleStar}
           />
       </div>
+    </div>
     );
   }
 }
