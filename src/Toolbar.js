@@ -17,6 +17,7 @@ render(){
          "fa-square-o" :
          "fa-check-square-o";
 
+
   return (
     <div class="row toolbar">
       <div class="col-md-12">
@@ -29,7 +30,7 @@ render(){
           <i class="fa fa-plus"></i>
         </a>
 
-        <button class="btn btn-default">
+        <button class="btn btn-default" onClick={()=> this.props.selectAll(selectedIcon)}>
           <i class={`fa ${selectedIcon}`}></i>
         </button>
 

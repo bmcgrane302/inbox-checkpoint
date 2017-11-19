@@ -89,6 +89,31 @@ class App extends Component {
     })
     console.log("I love react ____",this.state.messages);
   }
+  unselectAll(){
+    let newState =this.state.messages.map(message => {
+      message.selected = false;
+      return {...message}
+    });
+    this.setState({messages: newState});
+  }
+
+  selectAllMsg(){
+    let newState =this.state.messages.map(message => {
+      message.selected = true;
+      return {...message}
+    });
+    this.setState({messages: newState});
+  }
+
+  selectStatus = (icon) => {
+    if(icon === 'fa-check-square-o'){
+      this.unselectAll();
+    }else{
+      this.selectAllMsg()
+    }
+     console.log('select all----',icon);
+
+  }
 
 
 
@@ -99,6 +124,7 @@ class App extends Component {
       <div className="App" >
         <Toolbar
           messages = {this.state.messages}
+          selectAll = {this.selectStatus}
           />
         <MessageList
           messages = {this.state.messages}
