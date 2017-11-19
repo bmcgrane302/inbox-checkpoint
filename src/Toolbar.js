@@ -34,9 +34,13 @@ render(){
           <i class={`fa ${selectedIcon}`}></i>
         </button>
 
-        <button class="btn btn-default">Mark As Read</button>
+        <button class="btn btn-default"
+          onClick={()=> this.props.markAsRead()}
+          >Mark As Read</button>
 
-        <button class="btn btn-default">Mark As Unread</button>
+        <button class="btn btn-default"
+          onClick={()=> this.props.markAsUnead()}
+          >Mark As Unread</button>
 
         <select class="form-control label-select">
           <option>Apply label</option>

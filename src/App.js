@@ -77,11 +77,11 @@ class App extends Component {
       prevState.messages[index].selected = !prevState.messages[index].selected;
       return {...message}
     })
-    console.log("I hate react____",this.state.messages);
+    console.log("toggle selected____",this.state.messages);
   }
 
   toggleStar = (message) => {
-    console.log(message);
+    console.log('toggle star',message);
     this.setState((prevState)=>{
       let index = prevState.messages.indexOf(message)
       prevState.messages[index].starred = !prevState.messages[index].starred;
@@ -112,8 +112,31 @@ class App extends Component {
       this.selectAllMsg()
     }
      console.log('select all----',icon);
-
   }
+
+  markAsRead = () =>{
+    console.log('mark as read button:');
+    let unreadMsg = this.state.messages.map(message =>{
+      if(message.read === true){
+        message.read = false
+      }
+      return message
+    })
+    this.setState({messages: unreadMsg})
+  }
+
+  markAsUnead = () =>{
+    console.log('mark as read button:');
+    let unreadMsg = this.state.messages.map(message =>{
+      if(message.read === false){
+        message.read = true
+      }
+      return message
+    })
+    this.setState({messages: unreadMsg})
+  }
+
+
 
 
 
@@ -125,6 +148,8 @@ class App extends Component {
         <Toolbar
           messages = {this.state.messages}
           selectAll = {this.selectStatus}
+          markAsRead = {this.markAsRead}
+          markAsUnead = {this.markAsUnead}
           />
         <MessageList
           messages = {this.state.messages}
