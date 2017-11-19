@@ -89,6 +89,7 @@ class App extends Component {
     })
     console.log("I love react ____",this.state.messages);
   }
+
   unselectAll(){
     let newState =this.state.messages.map(message => {
       message.selected = false;
@@ -117,8 +118,8 @@ class App extends Component {
   markAsRead = () =>{
     console.log('mark as read button:');
     let unreadMsg = this.state.messages.map(message =>{
-      if(message.read === true){
-        message.read = false
+      if(message.read === false){
+        message.read = true
       }
       return message
     })
@@ -128,14 +129,13 @@ class App extends Component {
   markAsUnead = () =>{
     console.log('mark as read button:');
     let unreadMsg = this.state.messages.map(message =>{
-      if(message.read === false){
-        message.read = true
+      if(message.read === true){
+        message.read = false
       }
       return message
     })
     this.setState({messages: unreadMsg})
   }
-
 
 
 

@@ -5,10 +5,19 @@ class Toolbar extends Component {
 
 render(){
 
+  let status = this.props.messages.filter(message =>{
+    return message.read === false;
+
+  });
+
+  console.log('read status count',status);
+
+
   let currentSelected = this.props.messages.filter(msg =>{
     return msg.selected
   });
   console.log("current", currentSelected);
+
 
   let selectedIcon = (currentSelected.length > 0 &&
     currentSelected.length < this.props.messages.length) ?
@@ -22,7 +31,7 @@ render(){
     <div class="row toolbar">
       <div class="col-md-12">
         <p class="pull-right">
-          <span class="badge badge">2</span>
+          <span class="badge badge">{status.length}</span>
           unread messages
         </p>
 
