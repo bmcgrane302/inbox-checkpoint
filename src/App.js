@@ -137,6 +137,20 @@ class App extends Component {
     this.setState({messages: unreadMsg})
   }
 
+  deleteMsg = () =>{
+    console.log('delete messages on toolbar');
+    let selectedArr = [];
+    let selDel = this.state.messages.map(message =>{
+      if(message.selected === true){
+        selectedArr.push(message)
+      }
+
+      return selectedArr
+    })
+    console.log('selected for deletion',selectedArr);
+  }
+
+
 
 
 
@@ -150,6 +164,7 @@ class App extends Component {
           selectAll = {this.selectStatus}
           markAsRead = {this.markAsRead}
           markAsUnead = {this.markAsUnead}
+          deleteMsg = {this.deleteMsg}
           />
         <MessageList
           messages = {this.state.messages}

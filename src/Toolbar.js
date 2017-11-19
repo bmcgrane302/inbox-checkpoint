@@ -65,7 +65,9 @@ render(){
           <option value="gschool">gschool</option>
         </select>
 
-        <button class="btn btn-default">
+        <button class="btn btn-default"
+           onClick={()=>this.props.deleteMsg()}
+          >
           <i class="fa fa-trash-o"></i>
         </button>
       </div>
