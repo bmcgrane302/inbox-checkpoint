@@ -123,6 +123,7 @@ class App extends Component {
       }
       return message
     })
+    console.log("CHECK ME", unreadMsg);
     this.setState({messages: unreadMsg})
   }
 
@@ -152,7 +153,22 @@ class App extends Component {
   //   })
   //   console.log('selected for deletion',selectedArr);
   // }
+  addLabel = (label) =>{
+    console.log('add label button', label);
+    let newState = this.state.messages.map(msg =>{
+      if(msg.selected && !msg.labels.includes(label)) msg.labels.push(label)
+      return msg
+    })
+    this.setState({messages: newState})
+  }
 
+  removeLabel = (label) =>{
+    let newState = this.state.messages.map(msg =>{
+      if(msg.selected) msg.labels = msg.labels.filter(l => l !== label)
+      return msg
+    })
+    this.setState({messages: newState})
+  }
 
 
 
@@ -167,6 +183,8 @@ class App extends Component {
           markAsRead = {this.markAsRead}
           markAsUnead = {this.markAsUnead}
           deleteMsg = {this.deleteMsg}
+          addLabel= {this.addLabel}
+          removeLabel= {this.removeLabel}
           />
         <MessageList
           messages = {this.state.messages}

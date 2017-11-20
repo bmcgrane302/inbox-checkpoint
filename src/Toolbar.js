@@ -28,47 +28,47 @@ render(){
 
 
   return (
-    <div class="row toolbar">
-      <div class="col-md-12">
-        <p class="pull-right">
-          <span class="badge badge">{status.length}</span>
+    <div className="row toolbar">
+      <div className="col-md-12">
+        <p className="pull-right">
+          <span className="badge badge">{status.length}</span>
           unread messages
         </p>
 
-        <a class="btn btn-danger">
-          <i class="fa fa-plus"></i>
+        <a className="btn btn-danger">
+          <i className="fa fa-plus"></i>
         </a>
 
-        <button class="btn btn-default" onClick={()=> this.props.selectAll(selectedIcon)}>
-          <i class={`fa ${selectedIcon}`}></i>
+        <button className="btn btn-default" onClick={()=> this.props.selectAll(selectedIcon)}>
+          <i className={`fa ${selectedIcon}`}></i>
         </button>
 
-        <button class="btn btn-default"
+        <button className="btn btn-default"
           onClick={()=> this.props.markAsRead()}
           >Mark As Read</button>
 
-        <button class="btn btn-default"
+        <button className="btn btn-default"
           onClick={()=> this.props.markAsUnead()}
           >Mark As Unread</button>
 
-        <select class="form-control label-select">
+        <select className="form-control label-select" onChange={(e)=> this.props.addLabel(e.target.value)}>
           <option>Apply label</option>
           <option value="dev">dev</option>
           <option value="personal">personal</option>
           <option value="gschool">gschool</option>
         </select>
 
-        <select class="form-control label-select">
+        <select className="form-control label-select" onChange={(e)=> this.props.removeLabel(e.target.value)} >
           <option>Remove label</option>
           <option value="dev">dev</option>
           <option value="personal">personal</option>
           <option value="gschool">gschool</option>
         </select>
 
-        <button class="btn btn-default"
+        <button className="btn btn-default"
            onClick={()=>this.props.deleteMsg()}
           >
-          <i class="fa fa-trash-o"></i>
+          <i className="fa fa-trash-o"></i>
         </button>
       </div>
 </div>
