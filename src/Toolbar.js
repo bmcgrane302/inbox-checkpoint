@@ -22,7 +22,7 @@ render(){
   let selectedIcon = (currentSelected.length > 0 &&
     currentSelected.length < this.props.messages.length) ?
       "fa-minus-square-o" :
-        currentSelected.length === 0 ?
+         currentSelected.length === 0 ?
          "fa-square-o" :
          "fa-check-square-o";
 

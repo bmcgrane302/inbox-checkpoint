@@ -71,7 +71,7 @@ class App extends Component {
   }
 
   toggleSelected = (message) => {
-    console.log(message);
+    console.log('toggleselected',message);
     this.setState((prevState)=>{
       let index = prevState.messages.indexOf(message)
       prevState.messages[index].selected = !prevState.messages[index].selected;
@@ -139,16 +139,19 @@ class App extends Component {
 
   deleteMsg = () =>{
     console.log('delete messages on toolbar');
-    let selectedArr = [];
-    let selDel = this.state.messages.map(message =>{
-      if(message.selected === true){
-        selectedArr.push(message)
-      }
+    let newState =this.state.messages.filter((message) => !message.selected)
 
-    })
-    console.log('selected for deletion',selectedArr);
+    this.setState({messages: newState});
   }
-
+  //   let selectedArr = [];
+  //   let selDel = this.state.messages.map(message =>{
+  //     if(message.selected === true){
+  //       selectedArr.push(message)
+  //     }
+  //
+  //   })
+  //   console.log('selected for deletion',selectedArr);
+  // }
 
 
 
