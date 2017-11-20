@@ -118,7 +118,7 @@ class App extends Component {
   markAsRead = () =>{
     console.log('mark as read button:');
     let unreadMsg = this.state.messages.map(message =>{
-      if(message.read === false){
+      if(message.selected === true){
         message.read = true
       }
       return message
@@ -129,7 +129,7 @@ class App extends Component {
   markAsUnead = () =>{
     console.log('mark as read button:');
     let unreadMsg = this.state.messages.map(message =>{
-      if(message.read === true){
+      if(message.selected === true){
         message.read = false
       }
       return message
@@ -145,7 +145,6 @@ class App extends Component {
         selectedArr.push(message)
       }
 
-      return selectedArr
     })
     console.log('selected for deletion',selectedArr);
   }
