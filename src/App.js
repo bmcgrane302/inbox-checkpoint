@@ -2,92 +2,58 @@ import React, { Component } from 'react';
 import './App.css';
 import MessageList from './MessageList';
 import Toolbar from './Toolbar';
+import ComposeMsg from './ComposeMsg'
+import axios from 'axios';
 
 
 
 class App extends Component {
 
   state = {
-    messages : [
-  {
-    "id": 1,
-    "subject": "You can't input the protocol without calculating the mobile RSS protocol!",
-    "read": false,
-    "starred": true,
-    "labels": ["dev", "personal"]
-  },
-  {
-    "id": 2,
-    "subject": "connecting the system won't do anything, we need to input the mobile AI panel!",
-    "read": false,
-    "starred": false,
-    "selected": true,
-    "labels": []
-  },
-  {
-    "id": 3,
-    "subject": "Use the 1080p HTTP feed, then you can parse the cross-platform hard drive!",
-    "read": false,
-    "starred": true,
-    "labels": ["dev"]
-  },
-  {
-    "id": 4,
-    "subject": "We need to program the primary TCP hard drive!",
-    "read": true,
-    "starred": false,
-    "selected": true,
-    "labels": []
-  },
-  {
-    "id": 5,
-    "subject": "If we override the interface, we can get to the HTTP feed through the virtual EXE interface!",
-    "read": false,
-    "starred": false,
-    "labels": ["personal"]
-  },
-  {
-    "id": 6,
-    "subject": "We need to back up the wireless GB driver!",
-    "read": true,
-    "starred": true,
-    "labels": []
-  },
-  {
-    "id": 7,
-    "subject": "We need to index the mobile PCI bus!",
-    "read": true,
-    "starred": false,
-    "labels": ["dev", "personal"]
-  },
-  {
-    "id": 8,
-    "subject": "If we connect the sensor, we can get to the HDD port through the redundant IB firewall!",
-    "read": true,
-    "starred": true,
-    "labels": []
-  }
-]
+    messages : [],
+    show: false
   }
 
+  async componentDidMount() {
+    let messages = await axios.get(`http://localhost:8000/messages`)
+    this.setState({ messages: messages.data })
+  }
+
+
+  showComposeBox = () => {
+    console.log('show compose box', this.show);
+    let show = this.state.show;
+    this.setState({show: !show})
+  }
+
+  addMessage = async (message) => {
+    let newMessage = {
+    ...message,
+    labels: JSON.stringify([]),
+    read: false,
+    selected: false,
+    starred: false
+  }
+  let newMessages = await axios.post(`http://localhost:8000/messages`, newMessage)
+  this.setState({ messages: newMessages.data })
+  }
+
+
   toggleSelected = (message) => {
-    console.log('toggleselected',message);
+    console.log('message is', message);
     this.setState((prevState)=>{
       let index = prevState.messages.indexOf(message)
       prevState.messages[index].selected = !prevState.messages[index].selected;
       return {...message}
     })
-    console.log("toggle selected____",this.state.messages);
   }
 
   toggleStar = (message) => {
-    console.log('toggle star',message);
     this.setState((prevState)=>{
       let index = prevState.messages.indexOf(message)
       prevState.messages[index].starred = !prevState.messages[index].starred;
       return {...message}
     })
-    console.log("I love react ____",this.state.messages);
   }
 
   unselectAll(){
@@ -112,23 +78,20 @@ class App extends Component {
     }else{
       this.selectAllMsg()
     }
-     console.log('select all----',icon);
+     //console.log('select all----',icon);
   }
 
   markAsRead = () =>{
-    console.log('mark as read button:');
     let unreadMsg = this.state.messages.map(message =>{
       if(message.selected === true){
         message.read = true
       }
       return message
     })
-    console.log("CHECK ME", unreadMsg);
     this.setState({messages: unreadMsg})
   }
 
   markAsUnead = () =>{
-    console.log('mark as read button:');
     let unreadMsg = this.state.messages.map(message =>{
       if(message.selected === true){
         message.read = false
@@ -139,22 +102,12 @@ class App extends Component {
   }
 
   deleteMsg = () =>{
-    console.log('delete messages on toolbar');
     let newState =this.state.messages.filter((message) => !message.selected)
 
     this.setState({messages: newState});
   }
-  //   let selectedArr = [];
-  //   let selDel = this.state.messages.map(message =>{
-  //     if(message.selected === true){
-  //       selectedArr.push(message)
-  //     }
-  //
-  //   })
-  //   console.log('selected for deletion',selectedArr);
-  // }
+
   addLabel = (label) =>{
-    console.log('add label button', label);
     let newState = this.state.messages.map(msg =>{
       if(msg.selected && !msg.labels.includes(label)) msg.labels.push(label)
       return msg
@@ -173,7 +126,7 @@ class App extends Component {
 
 
   render() {
-
+   console.log('current state',this);
     return (
     <div className="container">
       <div className="App" >
@@ -185,7 +138,9 @@ class App extends Component {
           deleteMsg = {this.deleteMsg}
           addLabel= {this.addLabel}
           removeLabel= {this.removeLabel}
+          showComposeBox= {this.showComposeBox}
           />
+        { this.state.show ? <ComposeMsg addMessage={this.addMessage}/>: null}
         <MessageList
           messages = {this.state.messages}
           toggleSelected = {this.toggleSelected}

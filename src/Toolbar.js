@@ -38,7 +38,7 @@ render(){
           unread messages
         </p>
 
-        <a className="btn btn-danger">
+        <a className="btn btn-danger" onClick={this.props.showComposeBox}>
           <i className="fa fa-plus"></i>
         </a>
 
